@@ -22,7 +22,7 @@
     <select id="listFavourPostByPage"
             resultType="com.yupi.springbootinit.model.entity.Post">
         select p.*
-        from post p
+        from chart p
                  join (select postId from post_favour where userId = #{favourUserId}) pf
                       on p.id = pf.postId ${ew.customSqlSegment}
     </select>

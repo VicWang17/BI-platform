@@ -7,12 +7,12 @@ import java.util.Date;
 import lombok.Data;
 
 /**
- * 用户
- * @TableName user
+ * 图表信息表
+ * @TableName chart
  */
-@TableName(value ="user")
+@TableName(value ="chart")
 @Data
-public class User implements Serializable {
+public class Chart implements Serializable {
     /**
      * id
      */
@@ -20,29 +20,35 @@ public class User implements Serializable {
     private Long id;
 
     /**
-     * 账号
+     * 分析目标
      */
-    private String userAccount;
+    private String goal;
 
     /**
-     * 密码
+     * 图表数据
      */
-    private String userPassword;
+    private String chartData;
 
     /**
-     * 用户昵称
+     * 标签列表（json 数组）
      */
-    private String userName;
+    private String chartType;
 
     /**
-     * 用户头像
+     * 生成的图表数据
      */
-    private String userAvatar;
+    private String getChart;
 
     /**
-     * 用户角色：user/admin
+     * 生成的分析结论
      */
-    private String userRole;
+    private String genResult;
+
+    /**
+     * 用户ID
+     *
+     */
+    private Long UserId;
 
     /**
      * 创建时间
