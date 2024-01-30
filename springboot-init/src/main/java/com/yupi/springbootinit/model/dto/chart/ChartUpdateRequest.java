@@ -15,6 +15,10 @@ import java.util.List;
 public class ChartUpdateRequest implements Serializable {
 
     /**
+     * name
+     */
+    private Long name;
+    /**
      * id
      */
     private Long id;

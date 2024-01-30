@@ -45,7 +45,7 @@ spring:
       max-file-size: 10MB
 server:
   address: 0.0.0.0
-  port: 8080
+  port: 12345
   servlet:
     context-path: /api
     # cookie 30 天过期
@@ -101,3 +101,7 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.yupi.springbootinit.controller
+yuapi:
+  client:
+    access-key: ve7ryzrj25dziqie7waklorvqa2pbr5j
+    secret-key: jdiazcnr7sqtn8ldqo61uh845yuq01r8
