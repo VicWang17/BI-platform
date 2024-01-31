@@ -1,39 +1,39 @@
-# 公共配置文件
-# @author <a href="https://github.com/liyupi">程序员鱼皮</a>
-# @from <a href="https://yupi.icu">编程导航知识星球</a>
+
+# @author <a href="https://github.com/liyupi">UOW College Hong Kong</a>
+# @from <a href="https://yupi.icu">GROUP PROJECT</a>
 spring:
   application:
     name: springboot-init
-  # 默认 dev 环境
+  # Default dev environment
   profiles:
     active: dev
-  # 支持 swagger3
+  # support swagger3
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  # session 配置
+  # session config
   session:
-    # todo 取消注释开启分布式 session（须先配置 Redis）
+    # todo  cancel comments start separate session(config Redis first)
     # store-type: redis
-    # 30 天过期
+    # 30 days
     timeout: 2592000
   # 数据库配置
-  # todo 需替换配置
+  # todo change
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/bi_db
     username: root
     password: 123456
-  # Redis 配置
-  # todo 需替换配置，然后取消注释
+  # Redis config
+  # todo change
 #  redis:
 #    database: 1
 #    host: localhost
 #    port: 6379
 #    timeout: 5000
 #    password: 123456
-  # Elasticsearch 配置
-  # todo 需替换配置，然后取消注释
+  # Elasticsearch config
+  # todo change
 #  elasticsearch:
 #    uris: http://localhost:9200
 #    username: root
@@ -41,14 +41,14 @@ spring:
   # 文件上传
   servlet:
     multipart:
-      # 大小限制
+      # size limit
       max-file-size: 10MB
 server:
   address: 0.0.0.0
   port: 12345
   servlet:
     context-path: /api
-    # cookie 30 天过期
+    # cookie 30days
     session:
       cookie:
         max-age: 2592000
@@ -58,13 +58,12 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
-      logic-delete-field: isDelete # 全局逻辑删除的实体字段名
-      logic-delete-value: 1 # 逻辑已删除值（默认为 1）
-      logic-not-delete-value: 0 # 逻辑未删除值（默认为 0）
-# 微信相关
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+# Wechat
 wx:
-  # 微信公众平台
-  # todo 需替换配置
+  # todo need to change
   mp:
     token: xxx
     aesKey: xxx
@@ -78,30 +77,26 @@ wx:
         port: 6379
       type: Memory
   # 微信开放平台
-  # todo 需替换配置
+  # todo need to change
   open:
     appId: xxx
     appSecret: xxx
-# 对象存储
-# todo 需替换配置
+# todo need to change
 cos:
   client:
     accessKey: xxx
     secretKey: xxx
     region: xxx
     bucket: xxx
-# 接口文档配置
+# api config
 knife4j:
   enable: true
   openapi:
-    title: "接口文档"
+    title: "api document"
     version: 1.0
     group:
       default:
         api-rule: package
         api-rule-resources:
           - com.yupi.springbootinit.controller
-yuapi:
-  client:
-    access-key: ve7ryzrj25dziqie7waklorvqa2pbr5j
-    secret-key: jdiazcnr7sqtn8ldqo61uh845yuq01r8
+

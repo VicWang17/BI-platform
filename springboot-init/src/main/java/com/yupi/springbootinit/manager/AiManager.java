@@ -1,11 +1,17 @@
 package com.yupi.springbootinit.manager;
 
+import com.yupi.springbootinit.MainApplication;
+import org.springframework.boot.SpringApplication;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+@Service
 public class AiManager {
     private static final String API_KEY = "qc1jLQtoYGIsUkRkoZGhefFk";
     private static final String SECRET_KEY = "es5Eo5NqgknYOGKiMP41ajFHgTThwU98";
@@ -35,12 +41,44 @@ public class AiManager {
         return response.toString().replaceAll("\"", "").split("access_token:")[1].split(",")[0];
     }
 
-    public static String getResult() throws Exception {
+    public static String getResult(String message) throws Exception {
         String accessToken = getAccessToken();
         String url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=" + accessToken;
 
-        String system = "You only can speak English.";
-        String content = "Who are you?";
+        String system = "You are a data analysis expert.\n "+
+                "I will provide you with the requirements and data. "+
+                "Please output the analyse result and Echarts code in the specified format below " +
+                "(in addition, do not output any unnecessary beginning, ending, or comments).\n" +
+                "You only can speak English.\n"+
+                "User: \n" +
+                "Requirement: Please analyze the data." +
+                "Data: \n" +
+                "Mon, Tue, Wed, Thu, Fri, Sat, Sun,\n" +
+                "120, 200, 150, 80, 70, 110, 130\n" +
+                "You: \n" +
+                "Echarts JS Code:\n" +
+                "option = {\n" +
+                "  xAxis: {\n" +
+                "    type: 'category',\n" +
+                "    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n" +
+                "  },\n" +
+                "  yAxis: {\n" +
+                "    type: 'value'\n" +
+                "  },\n" +
+                "  series: [\n" +
+                "    {\n" +
+                "      data: [120, 200, 150, 80, 70, 110, 130],\n" +
+                "      type: 'bar'\n" +
+                "    }\n" +
+                "  ]\n" +
+                "};\n" +
+                "Analyze:\n" +
+                "The provided data represents values for each day of the week, followed by numerical values. " +
+                "The values for each day vary, indicating potential fluctuation in the measured metric throughout " +
+                "the week. The average value is approximately 118.57. Further analysis could involve calculating " +
+                "the minimum and maximum values, as well as identifying any specific patterns or trends in the data.";
+        system = system.replaceAll("\n","\\n");
+        String content = "User: " + message + "You: ";
         content = system + content;
         String payload = "{\n" +
                 "    \"messages\": [\n" +
@@ -72,13 +110,19 @@ public class AiManager {
         return response.toString();
     }
 
-    public static void main(String[] args) {
+    public String doChat(String message){
         try {
-            String result = getResult();
+            String result = getResult(message);
             String cleanedResult = result.split("\"result\":\"")[1].split("\",\"is_truncated\"")[0];
             System.out.println(cleanedResult);
+            return cleanedResult;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "AI manager ERROR";
     }
-}
+
+
+
+    }
