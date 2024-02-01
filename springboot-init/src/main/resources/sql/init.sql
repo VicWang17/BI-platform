@@ -24,6 +24,7 @@ create table if not exists post
     chartType    varchar(128)              null comment '标签列表（json 数组）',
     getChart     text                      null comment '生成的图表数据',
     genResult    text                      null comment '生成的分析结论',
+    userId      bigint                     null comment '用户id',
     createTime datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     updateTime datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     isDelete   tinyint  default 0                 not null comment '是否删除'
