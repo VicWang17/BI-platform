@@ -48,11 +48,11 @@ public class ExcelUtils {
         LinkedHashMap<Integer, String> headerMap = (LinkedHashMap) list.get(0);
         List<String> headerlist = headerMap.values().stream().filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
 
-        stringBuilder.append(StringUtils.join(headerlist,",")).append("\n");
+        stringBuilder.append(StringUtils.join(headerlist,",")); //.append("\n");
         for (int i =1;i< list.size();i++){
             LinkedHashMap<Integer, String> dataMap = (LinkedHashMap) list.get(i);
             List<String> datalist = dataMap.values().stream().filter(ObjectUtils::isNotEmpty).collect(Collectors.toList());
-            stringBuilder.append(StringUtils.join(datalist,",")).append("\n");
+            stringBuilder.append(StringUtils.join(datalist,",")); //append("\n");
         }
         System.out.println(list);
         return stringBuilder.toString();

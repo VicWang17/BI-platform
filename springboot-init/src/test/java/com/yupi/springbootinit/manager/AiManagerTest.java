@@ -19,6 +19,6 @@ class AiManagerTest {
 
     @Test
     void doChat() {
-        String result = aiManager.doChat("Requirement： Make a charts code. Data： Jan,Feb,Mar,12,32,42.");
+        String result = aiManager.doChat("Requirement: Make a charts code. Data: Jan,Feb,Mar,12,32,42.");
     }
 }

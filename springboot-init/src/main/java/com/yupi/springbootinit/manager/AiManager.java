@@ -45,9 +45,34 @@ public class AiManager {
         String accessToken = getAccessToken();
         String url = "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=" + accessToken;
 
+
+
+/*        systems.append("option = {\n")
+                .append("  xAxis: {\n")
+                .append("    type: 'category',\n")
+                .append("    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n")
+                .append("  },\n")
+                .append("  yAxis: {\n")
+                .append("    type: 'value'\n")
+                .append("  },\n")
+                .append("  series: [\n")
+                .append("    {\n")
+                .append("      data: [120, 200, 150, 80, 70, 110, 130],\n")
+                .append("      type: 'bar'\n")
+                .append("    }\n")
+                .append("  ]\n")
+                .append("};\n")
+                .append("Analyze: ")
+                .append("The provided data represents values for each day of the week, followed by numerical values." +
+                        "The values for each day vary, indicating potential fluctuation in the measured metric throughout" +
+                        "the week. The average value is approximately 118.57. Further analysis could involve calculating" +
+                        "the minimum and maximum values, as well as identifying any specific patterns or trends in the data.");*/
+
+
+
         String system = "You are a data analysis expert.\n "+
                 "I will provide you with the requirements and data. "+
-                "Please output the analyse result and Echarts code in the specified format below " +
+                "Please output the Echarts code and the analyse result in the specified format below " +
                 "(in addition, do not output any unnecessary beginning, ending, or comments).\n" +
                 "You only can speak English.\n"+
                 "User: \n" +
@@ -80,6 +105,7 @@ public class AiManager {
         system = system.replaceAll("\n","\\n");
         String content = "User: " + message + "You: ";
         content = system + content;
+
         String payload = "{\n" +
                 "    \"messages\": [\n" +
                 "        {\n" +
@@ -88,6 +114,9 @@ public class AiManager {
                 "        }\n" +
                 "    ]\n" +
                 "}";
+
+        System.out.println(payload);
+
         URL apiUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) apiUrl.openConnection();
         connection.setRequestMethod("POST");
