@@ -72,7 +72,7 @@ public class AiManager {
 
         String system = "You are a data analysis expert.\n "+
                 "I will provide you with the requirements and data. "+
-                "Please output the Echarts code and the analyse result in the specified format below " +
+                "Please output the Echarts code and the analyse result in the specified format below. " +
                 "(in addition, do not output any unnecessary beginning, ending, or comments).\n" +
                 "You only can speak English.\n"+
                 "User: \n" +
@@ -81,29 +81,32 @@ public class AiManager {
                 "Mon, Tue, Wed, Thu, Fri, Sat, Sun,\n" +
                 "120, 200, 150, 80, 70, 110, 130\n" +
                 "You: \n" +
-                "Echarts JS Code:\n" +
-                "option = {\n" +
-                "  xAxis: {\n" +
-                "    type: 'category',\n" +
-                "    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']\n" +
+                "Echarts JSON Code:\n" +
+                "{\n" +
+                "  \"title\": { text: \"Data\", " +
+                " left: \"center\" },\n" +
+                "  \"xAxis\": {\n" +
+                "    \"type\": \"category\",\n" +
+                "    \"data\": [\"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\", \"Sat\", \"Sun\"]\n" +
                 "  },\n" +
-                "  yAxis: {\n" +
-                "    type: 'value'\n" +
+                "  \"yAxis\": {\n" +
+                "    \"type\": \"value\"\n" +
                 "  },\n" +
-                "  series: [\n" +
+                "  \"series\": [\n" +
                 "    {\n" +
-                "      data: [120, 200, 150, 80, 70, 110, 130],\n" +
-                "      type: 'bar'\n" +
+                "      \"data\": [150, 230, 224, 218, 135, 147, 260],\n" +
+                "      \"type\": \"line\"\n" +
                 "    }\n" +
                 "  ]\n" +
-                "};\n" +
+                "}" +
                 "Analyze:\n" +
                 "The provided data represents values for each day of the week, followed by numerical values. " +
                 "The values for each day vary, indicating potential fluctuation in the measured metric throughout " +
                 "the week. The average value is approximately 118.57. Further analysis could involve calculating " +
                 "the minimum and maximum values, as well as identifying any specific patterns or trends in the data.";
-        system = system.replaceAll("\n","\\n");
-        String content = "User: " + message + "You: ";
+        system = system.replaceAll("\n","  ");
+        system = system.replaceAll("\"","'");
+        String content = "User: " + message + " You: ";
         content = system + content;
 
         String payload = "{\n" +

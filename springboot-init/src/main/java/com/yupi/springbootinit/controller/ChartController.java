@@ -243,7 +243,7 @@ public class ChartController {
 
         StringBuilder userInput = new StringBuilder();
         if(StringUtils.isNotBlank(chartType)){
-            goal += ", and use" + chartType + "this type";
+            goal += ", and use " + chartType + " this type";
         }
         userInput.append("Requirement: ").append(goal);//append("\n");
         //压缩数据
@@ -251,10 +251,11 @@ public class ChartController {
         //用户输入
         userInput.append("Data: ").append(result);//append("\n");
         String aiResult = aiManager.doChat(userInput.toString());
-        String[] splits = aiResult.split("javascript");
+        String[] splits = aiResult.split("json");
         String genChart = splits[1].split("Analyze:")[0];
         genChart = genChart.replaceAll("\\\\n","");
         genChart = genChart.replaceAll("```","");
+        genChart = genChart.replaceAll("'","\"");
         String genResult = splits[1].split("Analyze:")[1];
         //genResult = genResult.replaceAll("\\\\","\\");
         /*if (splits.length< 3){

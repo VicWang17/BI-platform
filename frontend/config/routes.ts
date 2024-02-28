@@ -23,10 +23,14 @@ export default [
     ],
   },
   {
-    path: '/welcome',
-    name: 'welcome',
-    icon: 'smile',
-    component: './Welcome',
+    path: '/',
+    redirect: '/add_chart'
+  },
+  {
+    path: '/add_chart',
+    name: 'Analyze',
+    icon: 'LineChartOutlined',
+    component: './AddChart',
   },
   {
     path: '/admin',
