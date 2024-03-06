@@ -105,6 +105,7 @@ const App: React.FC = () => {
                   <Option value="Basic Line Chart">Basic Line Chart</Option>
                   <Option value="Smoothed Line Chart">Smoothed Line Chart</Option>
                   <Option value="Basic Scatter Chart">Scatter Chart</Option>
+                  <Option value="Basic Radar Chart">Basic Radar Chart</Option>
                 </Select>
               </Form.Item>
 

@@ -33,6 +33,12 @@ export default [
     component: './AddChart',
   },
   {
+    path: '/history',
+    name: 'Chart History',
+    icon: 'HistoryOutlined',
+    component: './History',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',
