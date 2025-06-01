@@ -251,16 +251,38 @@ public class ChartController {
         //用户输入
         userInput.append("Data: ").append(result);//append("\n");
         String aiResult = aiManager.doChat(userInput.toString());
-        String[] splits = aiResult.split("json");
-        String genChart = splits[1].split("Analyze:")[0];
-        genChart = genChart.replaceAll("\\\\n","");
-        genChart = genChart.replaceAll("```","");
-        genChart = genChart.replaceAll("'","\"");
-        String genResult = splits[1].split("Analyze:")[1];
-        //genResult = genResult.replaceAll("\\\\","\\");
-        /*if (splits.length< 3){
-            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "AI Generate Error");
-        }*/
+        String genChart = "";
+        String genResult = "";
+        
+        try {
+            // 尝试从AI响应中提取图表和分析结果
+            if (aiResult.contains("Echarts JSON Code:")) {
+                String[] parts = aiResult.split("Echarts JSON Code:");
+                if (parts.length > 1) {
+                    String[] subParts = parts[1].split("Analyze:");
+                    if (subParts.length > 1) {
+                        genChart = subParts[0].trim();
+                        genResult = subParts[1].trim();
+                    }
+                }
+            }
+            
+            // 清理图表数据
+            genChart = genChart.replaceAll("\\\\n", "")
+                    .replaceAll("```", "")
+                    .replaceAll("'", "\"");
+            
+            // 如果解析失败，使用原始响应
+            if (genChart.isEmpty() || genResult.isEmpty()) {
+                genChart = aiResult;
+                genResult = "无法解析AI响应，请检查输入数据格式。";
+            }
+        } catch (Exception e) {
+            log.error("解析AI响应失败", e);
+            genChart = aiResult;
+            genResult = "解析AI响应时发生错误：" + e.getMessage();
+        }
+
         User loginUser = userService.getLoginUser(request);
         Chart chart = new Chart();
         chart.setName(name);

@@ -72,7 +72,7 @@ const History: React.FC = () => {
       <div style = {{marginBottom: 55}} />
       <List
         itemLayout="horizontal"
-        grid={{gutter:16, xs:1, sm:2, md:4, lg:4, xl:6, xxl:3}}
+        grid={{gutter:16, xs:1, sm:1, md:2, lg:2, xl:3, xxl:3}}
         size="large"
         pagination={{
           onChange: (page, pageSize) => {
