@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: springboot-init
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bi_db
+    username: root
+    password: 123456
+
+# DeepSeek配置
+deepseek:
+  api:
+    key: your-api-key-here
+    url: https://api.deepseek.com/v1/chat/completions 

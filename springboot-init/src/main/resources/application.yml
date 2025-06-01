@@ -1,4 +1,3 @@
-
 # @author <a href="https://github.com/liyupi">UOW College Hong Kong</a>
 # @from <a href="https://yupi.icu">GROUP PROJECT</a>
 spring:
@@ -99,4 +98,10 @@ knife4j:
         api-rule: package
         api-rule-resources:
           - com.yupi.springbootinit.controller
+
+# DeepSeek配置
+deepseek:
+  api:
+    key: sk-b463537c0f6a4266ad2de8563ee9a15d
+    url: https://api.deepseek.com/v1/chat/completions
 

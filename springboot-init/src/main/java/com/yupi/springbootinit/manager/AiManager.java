@@ -2,7 +2,10 @@ package com.yupi.springbootinit.manager;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yupi.springbootinit.config.DeepSeekConfig;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -11,8 +14,9 @@ import java.net.URL;
 
 @Service
 public class AiManager {
-    private static final String API_KEY = "sk-b463537c0f6a4266ad2de8563ee9a15d";
-    private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
+    @Resource
+    private DeepSeekConfig deepSeekConfig;
+    
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public String doChat(String message) {
@@ -54,11 +58,11 @@ public class AiManager {
             system = system.replaceAll("\n","  ");
             system = system.replaceAll("\"","'");
 
-            URL url = new URL(API_URL);
+            URL url = new URL(deepSeekConfig.getUrl());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Authorization", "Bearer " + API_KEY);
+            connection.setRequestProperty("Authorization", "Bearer " + deepSeekConfig.getKey());
             connection.setDoOutput(true);
 
             String payload = "{\n" +
